@@ -8,7 +8,7 @@ import { UserService } from './user.service';
 
 const createUser: RequestHandler = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const { user } = req.body;
+    const { ...user } = req.body;
     const result = await UserService.createUser(user);
 
     sendResponse<IUser>(res, {
@@ -18,7 +18,7 @@ const createUser: RequestHandler = catchAsync(
       data: result,
     });
     next();
-  }
+  },
 );
 
 export const UserController = {
